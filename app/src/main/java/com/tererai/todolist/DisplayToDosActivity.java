@@ -90,8 +90,8 @@ public class DisplayToDosActivity extends AppCompatActivity {
             ToDo toDoDetail = new ToDo(data.getStringExtra(NewToDoActivity.EXTRA_DETAIL));
             ToDo toDoDate = new ToDo(data.getStringExtra(NewToDoActivity.EXTRA_DATE));
             mToDoViewModel.insert(toDo);
-           // mToDoViewModel.insert(toDoDetail);
-          //  mToDoViewModel.insert(toDoDate);
+            mToDoViewModel.insert(toDoDetail);
+            mToDoViewModel.insert(toDoDate);
         } else {
             Toast.makeText(getApplicationContext(), R.string.empty_not_saved, Toast.LENGTH_LONG).show();
         }

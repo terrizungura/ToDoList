@@ -13,25 +13,27 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Date;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class NewToDoActivity extends AppCompatActivity {
 
     public static final String EXTRA_REPLY = "com.example.android.todolist.REPLY";
     public static final String EXTRA_DETAIL = "com.example.android.todolist.REPLY";
     public static final String EXTRA_DATE = "com.example.android.todolist.REPLY";
 
-    private EditText mEditToDoView;
-    private EditText mEditToDoDetail;
-    private EditText mEditToDoDate;
+    @BindView(R.id.edit_todo) EditText mEditToDoView;
+    @BindView(R.id.edit_todo_detail) EditText mEditToDoDetail;
+    @BindView(R.id.edit_todo_date) EditText mEditToDoDate;
+    @BindView(R.id.button_save) Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_to_do);
 
-        mEditToDoView = findViewById(R.id.edit_todo);
-        mEditToDoDetail = findViewById(R.id.edit_todo_detail);
-        mEditToDoDate = findViewById(R.id.edit_todo_date);
-        final Button button = findViewById(R.id.button_save);
+        ButterKnife.bind(this);
 
         mEditToDoDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,5 +61,10 @@ public class NewToDoActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        /*@OnClick(R.id.textViewDetail)
+                public void saveToDo(){
+            //action
+        }*/
     }
 }

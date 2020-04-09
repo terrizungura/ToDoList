@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoViewHolder> {
 
     private final LayoutInflater mInflator;
@@ -31,6 +34,8 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoVi
         if(mToDos!=null){
             ToDo current = mToDos.get(position);
             holder.toDoItemView.setText(current.getTodo());
+            holder.textViewDetail.setText(current.getTodoDetail());
+            holder.textViewDate.setText(current.getDate());
         }else{
             holder.toDoItemView.setText("No ToDo");
         }
@@ -56,11 +61,13 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoVi
 
     class ToDoViewHolder extends RecyclerView.ViewHolder{
 
-        private final TextView toDoItemView;
+        @BindView (R.id.textView) TextView toDoItemView;
+        @BindView(R.id.textViewDetail) TextView textViewDetail;
+        @BindView(R.id.textViewDate) TextView textViewDate;
 
         private ToDoViewHolder(View itemView){
             super(itemView);
-            toDoItemView=itemView.findViewById(R.id.textView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }
