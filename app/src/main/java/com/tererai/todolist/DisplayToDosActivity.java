@@ -17,15 +17,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class DisplayToDosActivity extends AppCompatActivity {
 
     private ToDoViewModel mToDoViewModel;
 
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+
+    @BindView(R.id.fab) FloatingActionButton fab;
+    @BindView(R.id.image) ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +42,9 @@ public class DisplayToDosActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        ButterKnife.bind(this);
+
         mToDoViewModel = ViewModelProviders.of(this).get(ToDoViewModel.class);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DisplayToDosActivity.this, NewToDoActivity.class);
-                startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
-
-            }
-        });
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         final ToDoListAdapter adapter = new ToDoListAdapter(this);
@@ -59,6 +59,18 @@ public class DisplayToDosActivity extends AppCompatActivity {
             }
         });
     }
+
+    @OnClick(R.id.fab)
+        public void addNewToDo() {
+            Intent intent = new Intent(DisplayToDosActivity.this, NewToDoActivity.class);
+            startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
+
+        }
+
+        @OnClick(R.id.image)
+        public void deteteToDo(){
+        
+        }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

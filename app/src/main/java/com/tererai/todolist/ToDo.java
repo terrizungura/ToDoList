@@ -27,11 +27,11 @@ public class ToDo {
     @ColumnInfo(name = "done_status")
     private boolean mDoneStatus;
 
-    public ToDo(@NonNull String todo, @NonNull String todo_detail, @NonNull String date, @NonNull boolean done_status){
+    public ToDo(@NonNull String todo, @NonNull String todoDetail, @NonNull String date, @NonNull boolean doneStatus){
         this.mTodo=todo;
-        this.mTodoDetail = todo_detail;
+        this.mTodoDetail = todoDetail;
         this.mDate = date;
-        this.mDoneStatus = done_status;
+        this.mDoneStatus = doneStatus;
     }
 
     public void setTodo(@NonNull String mTodo) {
