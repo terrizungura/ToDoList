@@ -87,7 +87,11 @@ public class DisplayToDosActivity extends AppCompatActivity {
 
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             ToDo toDo = new ToDo(data.getStringExtra(NewToDoActivity.EXTRA_REPLY));
+            ToDo toDoDetail = new ToDo(data.getStringExtra(NewToDoActivity.EXTRA_DETAIL));
+            ToDo toDoDate = new ToDo(data.getStringExtra(NewToDoActivity.EXTRA_DATE));
             mToDoViewModel.insert(toDo);
+           // mToDoViewModel.insert(toDoDetail);
+          //  mToDoViewModel.insert(toDoDate);
         } else {
             Toast.makeText(getApplicationContext(), R.string.empty_not_saved, Toast.LENGTH_LONG).show();
         }

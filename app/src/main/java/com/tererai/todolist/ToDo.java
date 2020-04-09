@@ -5,6 +5,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Date;
+
 @Entity(tableName = "todo_table")
 public class ToDo {
 
@@ -13,26 +15,45 @@ public class ToDo {
     @ColumnInfo(name = "todo")
     private String mTodo;
 
-    public ToDo(@NonNull String todo){
-        this.mTodo=todo;
-    }
-
-   /* @NonNull
+    @NonNull
     @ColumnInfo(name = "done_status")
     private boolean mDoneStatus=false;
 
     @ColumnInfo(name = "todo_detail")
-    private String mTodoDetail;*/
+    private String mTodoDetail;
+
+    @ColumnInfo(name="date")
+    private String mDate;
+
+    public ToDo(@NonNull String todo){
+        this.mTodo=todo;
+    }
+
+    public void setDoneStatus(boolean done_status) {
+        this.mDoneStatus = done_status;
+    }
+
+    public void setTodoDetail(String todo_detail) {
+        this.mTodoDetail = todo_detail;
+    }
+
+    public void setDate(String date) {
+        this.mDate = date;
+    }
 
     public String getTodo(){
         return this.mTodo;
     }
 
-   /* public boolean getDoneStatus(){
+    public boolean getDoneStatus(){
         return this.mDoneStatus;
     }
 
     public String getTodoDetail() {
         return mTodoDetail;
-    }*/
+    }
+
+    public String getDate() {
+        return mDate;
+    }
 }
