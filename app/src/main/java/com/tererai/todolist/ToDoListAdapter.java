@@ -4,12 +4,19 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoViewHolder> {
 
@@ -31,6 +38,35 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoVi
         if(mToDos!=null){
             ToDo current = mToDos.get(position);
             holder.toDoItemView.setText(current.getTodo());
+            holder.textViewDetail.setText(current.getTodoDetail());
+            holder.textViewDate.setText(current.getDate());
+            //delete action
+            holder.image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Toast.makeText(v.getContext(), current.getTodoID(), Toast.LENGTH_LONG).show();
+                }
+            });
+            //populate checkboxes
+            if(current.getDoneStatus()==true){
+                holder.checkCompleted.setChecked(true);
+            }else if(current.getDoneStatus()==false){
+                holder.checkCompleted.setChecked(false);
+            }
+            //toggle between between done and not done
+            holder.checkCompleted.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(holder.checkCompleted.isChecked()==true){
+                        current.setDoneStatus(true);
+                    }else if(holder.checkCompleted.isChecked()==false){
+                        current.setDoneStatus(false);
+                    }
+                }
+            });
+
+
         }else{
             holder.toDoItemView.setText("No ToDo");
         }
@@ -56,11 +92,15 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoVi
 
     class ToDoViewHolder extends RecyclerView.ViewHolder{
 
-        private final TextView toDoItemView;
+        @BindView (R.id.textView) TextView toDoItemView;
+        @BindView(R.id.textViewDetail) TextView textViewDetail;
+        @BindView(R.id.textViewDate) TextView textViewDate;
+        @BindView(R.id.image) ImageView image;
+        @BindView(R.id.completed) CheckBox checkCompleted;
 
         private ToDoViewHolder(View itemView){
             super(itemView);
-            toDoItemView=itemView.findViewById(R.id.textView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

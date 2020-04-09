@@ -22,7 +22,7 @@ public class ToDoViewModel extends AndroidViewModel {
         return mAllToDos;
     }
 
-    public void insert(ToDo todo){
-        mToDoRepository.insert(todo);
+    public void insert(ToDo toDo){
+        mToDoRepository.insert(toDo);
     }
 }
