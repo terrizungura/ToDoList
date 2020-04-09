@@ -16,21 +16,26 @@ public class ToDo {
     private String mTodo;
 
     @NonNull
-    @ColumnInfo(name = "done_status")
-    private boolean mDoneStatus=false;
-
     @ColumnInfo(name = "todo_detail")
     private String mTodoDetail;
 
+    @NonNull
     @ColumnInfo(name="date")
     private String mDate;
 
-    public ToDo(@NonNull String todo){
+    @NonNull
+    @ColumnInfo(name = "done_status")
+    private boolean mDoneStatus;
+
+    public ToDo(@NonNull String todo, @NonNull String todo_detail, @NonNull String date, @NonNull boolean done_status){
         this.mTodo=todo;
+        this.mTodoDetail = todo_detail;
+        this.mDate = date;
+        this.mDoneStatus = done_status;
     }
 
-    public void setDoneStatus(boolean done_status) {
-        this.mDoneStatus = done_status;
+    public void setTodo(@NonNull String mTodo) {
+        this.mTodo = mTodo;
     }
 
     public void setTodoDetail(String todo_detail) {
@@ -41,12 +46,13 @@ public class ToDo {
         this.mDate = date;
     }
 
-    public String getTodo(){
-        return this.mTodo;
+    public void setDoneStatus(boolean done_status) {
+        this.mDoneStatus = done_status;
     }
 
-    public boolean getDoneStatus(){
-        return this.mDoneStatus;
+
+    public String getTodo(){
+        return this.mTodo;
     }
 
     public String getTodoDetail() {
@@ -55,5 +61,9 @@ public class ToDo {
 
     public String getDate() {
         return mDate;
+    }
+
+    public boolean getDoneStatus(){
+        return this.mDoneStatus;
     }
 }
