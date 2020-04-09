@@ -12,6 +12,10 @@ public class ToDo {
 
     @PrimaryKey
     @NonNull
+    @ColumnInfo(name = "todoID")
+    private String mTodoID;
+
+    @NonNull
     @ColumnInfo(name = "todo")
     private String mTodo;
 
@@ -27,11 +31,16 @@ public class ToDo {
     @ColumnInfo(name = "done_status")
     private boolean mDoneStatus;
 
-    public ToDo(@NonNull String todo, @NonNull String todoDetail, @NonNull String date, @NonNull boolean doneStatus){
+    public ToDo(@NonNull String todoID, @NonNull String todo, @NonNull String todoDetail, @NonNull String date, @NonNull boolean doneStatus){
+        this.mTodoID=todoID;
         this.mTodo=todo;
         this.mTodoDetail = todoDetail;
         this.mDate = date;
         this.mDoneStatus = doneStatus;
+    }
+
+    public void setTodoID(@NonNull String mTodoID) {
+        this.mTodoID = mTodoID;
     }
 
     public void setTodo(@NonNull String mTodo) {
@@ -50,6 +59,9 @@ public class ToDo {
         this.mDoneStatus = done_status;
     }
 
+    public String getTodoID() {
+        return this.mTodoID;
+    }
 
     public String getTodo(){
         return this.mTodo;

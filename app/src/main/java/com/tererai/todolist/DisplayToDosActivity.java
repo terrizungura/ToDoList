@@ -33,7 +33,6 @@ public class DisplayToDosActivity extends AppCompatActivity {
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
 
     @BindView(R.id.fab) FloatingActionButton fab;
-    @BindView(R.id.image) ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,11 +66,6 @@ public class DisplayToDosActivity extends AppCompatActivity {
 
         }
 
-        @OnClick(R.id.image)
-        public void deteteToDo(){
-        
-        }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -95,10 +89,11 @@ public class DisplayToDosActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            ToDo toDo = new ToDo(data.getStringExtra(NewToDoActivity.EXTRA_REPLY),
+            ToDo toDo = new ToDo(data.getStringExtra(NewToDoActivity.EXTRA_ID),
+                    data.getStringExtra(NewToDoActivity.EXTRA_REPLY),
                     data.getStringExtra(NewToDoActivity.EXTRA_DETAIL),
                     data.getStringExtra(NewToDoActivity.EXTRA_DATE),
-                    false);
+                    data.getExtras().getBoolean(NewToDoActivity.EXTRA_STATUS));
             mToDoViewModel.insert(toDo);
         } else {
             Toast.makeText(getApplicationContext(), R.string.empty_not_saved, Toast.LENGTH_LONG).show();

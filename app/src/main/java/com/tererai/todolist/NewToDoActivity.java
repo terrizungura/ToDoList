@@ -12,6 +12,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 import java.util.Calendar;
+import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,7 +23,8 @@ public class NewToDoActivity extends AppCompatActivity {
     public static final String EXTRA_REPLY = "com.example.android.todolist.REPLY";
     public static final String EXTRA_DETAIL = "com.example.android.todolist.DETAIL";
     public static final String EXTRA_DATE = "com.example.android.todolist.DATE";
-    public static final boolean EXTRA_STATUS = false;
+    public static final String EXTRA_ID = "com.example.android.todolist.ID";
+    public static final String EXTRA_STATUS = "com.example.android.todolist.STATUS";
 
     @BindView(R.id.edit_todo) EditText mEditToDoView;
     @BindView(R.id.edit_todo_detail) EditText mEditToDoDetail;
@@ -66,9 +68,13 @@ public class NewToDoActivity extends AppCompatActivity {
                 String toDo = mEditToDoView.getText().toString();
                 String toDoDetail = mEditToDoDetail.getText().toString();
                 String toDoDate =  mEditToDoDate.getText().toString();
+                String toDoID =  UUID.randomUUID().toString();
+
                 replyIntent.putExtra(EXTRA_REPLY, toDo);
                 replyIntent.putExtra(EXTRA_DETAIL, toDoDetail);
                 replyIntent.putExtra(EXTRA_DATE, toDoDate);
+                replyIntent.putExtra(EXTRA_ID, toDoID);
+                replyIntent.putExtra(EXTRA_STATUS, false);
                 setResult(RESULT_OK, replyIntent);
 
             }
