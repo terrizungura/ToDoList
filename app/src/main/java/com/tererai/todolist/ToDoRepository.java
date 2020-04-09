@@ -22,6 +22,10 @@ public class ToDoRepository {
         return mAllToDos;
     }
 
+    public void deleteTaskById(ToDo toDo){
+        new deleteTaskAsyncTask(mToDoDao).execute(toDo);
+    }
+
     public void insert(ToDo todo){
         new insertAsyncTask(mToDoDao).execute(todo);
     }
@@ -36,6 +40,20 @@ public class ToDoRepository {
         @Override
         protected Void doInBackground(final ToDo... toDos) {
             mAsyncTaskDao.insert(toDos[0]);
+            return null;
+        }
+    }
+
+    private static class deleteTaskAsyncTask extends AsyncTask<ToDo, Void, Void>{
+        private ToDoDao mAsyncTaskDao;
+
+        deleteTaskAsyncTask(ToDoDao dao){
+            mAsyncTaskDao=dao;
+        }
+
+        @Override
+        protected Void doInBackground(ToDo... toDos) {
+            mAsyncTaskDao.deleteTaskById(toDos[0]);
             return null;
         }
     }

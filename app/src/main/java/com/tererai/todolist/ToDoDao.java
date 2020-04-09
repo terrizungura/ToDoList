@@ -2,6 +2,7 @@ package com.tererai.todolist;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -20,6 +21,6 @@ public interface ToDoDao {
     @Query("SELECT * from todo_table ORDER BY todo ASC")
     LiveData<List<ToDo>> getAllToDos();
 
-    /*@Query("DELETE from todo_table WHERE todo = todoID")
-    void deleteTask(ToDo todoID);*/
+    @Delete
+    void deleteTaskById(ToDo toDo);
 }
