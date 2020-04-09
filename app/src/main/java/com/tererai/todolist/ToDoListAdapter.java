@@ -44,7 +44,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoVi
             holder.image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    
+
                     Toast.makeText(v.getContext(), current.getTodoID(), Toast.LENGTH_LONG).show();
                 }
             });

@@ -20,6 +20,6 @@ public interface ToDoDao {
     @Query("SELECT * from todo_table ORDER BY todo ASC")
     LiveData<List<ToDo>> getAllToDos();
 
-    @Query("DELETE from todo_table WHERE todo = todoID")
-    void deleteTask(ToDo todoID);
+    /*@Query("DELETE from todo_table WHERE todo = todoID")
+    void deleteTask(ToDo todoID);*/
 }
