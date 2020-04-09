@@ -40,6 +40,4 @@ public abstract class ToDoRoomDatabase extends RoomDatabase {
                     super.onOpen(db);
                 }
             };
-
-
 }
