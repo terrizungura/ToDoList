@@ -6,6 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -23,4 +24,10 @@ public interface ToDoDao {
 
     @Delete
     void deleteTaskById(ToDo toDo);
+
+    @Query("UPDATE todo_table SET done_status = :done_status WHERE todoID = :todoID")
+    void updateStatus(boolean done_status, String todoID);
+   /* @Update
+    void update(ToDo... todo);*/
+
 }
