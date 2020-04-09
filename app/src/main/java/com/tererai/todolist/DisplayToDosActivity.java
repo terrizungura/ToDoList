@@ -17,15 +17,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class DisplayToDosActivity extends AppCompatActivity {
 
     private ToDoViewModel mToDoViewModel;
 
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+
+    @BindView(R.id.fab) FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +41,9 @@ public class DisplayToDosActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        ButterKnife.bind(this);
+
         mToDoViewModel = ViewModelProviders.of(this).get(ToDoViewModel.class);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DisplayToDosActivity.this, NewToDoActivity.class);
-                startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
-
-            }
-        });
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         final ToDoListAdapter adapter = new ToDoListAdapter(this);
@@ -54,11 +53,18 @@ public class DisplayToDosActivity extends AppCompatActivity {
         mToDoViewModel.getAllToDos().observe(this, new Observer<List<ToDo>>() {
             @Override
             public void onChanged(List<ToDo> toDos) {
-                // Update the cached copy of the words in the adapter.
+                // Update the cached copy of the ToDos in the adapter.
                 adapter.setToDos(toDos);
             }
         });
     }
+
+    @OnClick(R.id.fab)
+        public void addNewToDo() {
+            Intent intent = new Intent(DisplayToDosActivity.this, NewToDoActivity.class);
+            startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
+
+        }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -69,9 +75,6 @@ public class DisplayToDosActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -86,7 +89,11 @@ public class DisplayToDosActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            ToDo toDo = new ToDo(data.getStringExtra(NewToDoActivity.EXTRA_REPLY));
+            ToDo toDo = new ToDo(data.getStringExtra(NewToDoActivity.EXTRA_ID),
+                    data.getStringExtra(NewToDoActivity.EXTRA_REPLY),
+                    data.getStringExtra(NewToDoActivity.EXTRA_DETAIL),
+                    data.getStringExtra(NewToDoActivity.EXTRA_DATE),
+                    data.getExtras().getBoolean(NewToDoActivity.EXTRA_STATUS));
             mToDoViewModel.insert(toDo);
         } else {
             Toast.makeText(getApplicationContext(), R.string.empty_not_saved, Toast.LENGTH_LONG).show();

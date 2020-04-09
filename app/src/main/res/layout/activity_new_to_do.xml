@@ -12,6 +12,17 @@
         android:hint="@string/hint_todo"
         android:inputType="textAutoComplete" />
 
+    <EditText
+        android:id="@+id/edit_todo_detail"
+        style="@style/text_view_style"
+        android:hint="@string/hint_detail"
+        android:inputType="textAutoComplete" />
+
+    <EditText
+        android:id="@+id/edit_todo_date"
+        style="@style/text_view_style"
+        android:inputType="datetime" />
+
     <Button
         android:id="@+id/button_save"
         style="@style/button_style"
