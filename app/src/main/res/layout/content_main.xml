@@ -23,11 +23,10 @@
             android:orientation="vertical"
             android:paddingBottom="4dp">
 
-            <include
+            <com.tererai.todolist.SummaryWidget
                 android:id="@+id/summary"
-                layout="@layout/summary_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"/>
 
             <TextView
                 android:id="@+id/header"
