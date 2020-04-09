@@ -1,5 +1,6 @@
 package com.tererai.todolist;
 
+import android.app.Application;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -22,6 +24,8 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoVi
 
     private final LayoutInflater mInflator;
     private List<ToDo> mToDos; //Cached copy of ToDos
+
+
 
     ToDoListAdapter(Context context){
         mInflator = LayoutInflater.from(context);
@@ -35,6 +39,8 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoVi
 
     @Override
     public void onBindViewHolder(ToDoViewHolder holder, int position) {
+
+        ToDoViewModel toDoViewModel = ViewModelProviders.of(ToDoListAdapter.this).get(ToDoViewModel.class);
         if(mToDos!=null){
             ToDo current = mToDos.get(position);
             holder.toDoItemView.setText(current.getTodo());
@@ -44,7 +50,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoVi
             holder.image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    toDoViewModel.deleteTaskById(current.getTodoID());
                     Toast.makeText(v.getContext(), current.getTodoID(), Toast.LENGTH_LONG).show();
                 }
             });
@@ -65,7 +71,6 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoVi
                     }
                 }
             });
-
 
         }else{
             holder.toDoItemView.setText("No ToDo");
