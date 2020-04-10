@@ -22,6 +22,14 @@ public class ToDoRepository {
         return mAllToDos;
     }
 
+    public void updateStatus(ToDo toDo){
+        new updateStatusAsyncTask(mToDoDao).execute(toDo);
+    }
+
+    public void deleteTaskById(ToDo toDo){
+        new deleteTaskAsyncTask(mToDoDao).execute(toDo);
+    }
+
     public void insert(ToDo todo){
         new insertAsyncTask(mToDoDao).execute(todo);
     }
@@ -36,6 +44,34 @@ public class ToDoRepository {
         @Override
         protected Void doInBackground(final ToDo... toDos) {
             mAsyncTaskDao.insert(toDos[0]);
+            return null;
+        }
+    }
+
+    private static class deleteTaskAsyncTask extends AsyncTask<ToDo, Void, Void>{
+        private ToDoDao mAsyncTaskDao;
+
+        deleteTaskAsyncTask(ToDoDao dao){
+            mAsyncTaskDao=dao;
+        }
+
+        @Override
+        protected Void doInBackground(ToDo... toDos) {
+            mAsyncTaskDao.deleteTaskById(toDos[0]);
+            return null;
+        }
+    }
+
+    private static class updateStatusAsyncTask extends AsyncTask<ToDo, Void, Void>{
+        private ToDoDao mAsyncTaskDao;
+
+        updateStatusAsyncTask(ToDoDao dao){
+            mAsyncTaskDao=dao;
+        }
+
+        @Override
+        protected Void doInBackground(ToDo... toDos) {
+            mAsyncTaskDao.updateStatus(toDos[0]);
             return null;
         }
     }

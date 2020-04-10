@@ -40,7 +40,7 @@ public class DisplayToDosActivity extends AppCompatActivity {
         mToDoViewModel = ViewModelProviders.of(this).get(ToDoViewModel.class);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        final ToDoListAdapter adapter = new ToDoListAdapter(this);
+        final ToDoListAdapter adapter = new ToDoListAdapter(this, mToDoViewModel);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

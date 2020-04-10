@@ -1,5 +1,6 @@
 package com.tererai.todolist;
 
+import android.app.Application;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -22,9 +24,14 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoVi
 
     private final LayoutInflater mInflator;
     private List<ToDo> mToDos; //Cached copy of ToDos
+    private Context mContext;
+    private ToDoViewModel mToDoViewModel;
 
-    ToDoListAdapter(Context context){
+
+    ToDoListAdapter(Context context, ToDoViewModel toDoViewModel) {
         mInflator = LayoutInflater.from(context);
+        this.mContext = context;
+        this.mToDoViewModel = toDoViewModel;
     }
 
     @Override
@@ -35,7 +42,8 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoVi
 
     @Override
     public void onBindViewHolder(ToDoViewHolder holder, int position) {
-        if(mToDos!=null){
+
+        if (mToDos != null) {
             ToDo current = mToDos.get(position);
             holder.toDoItemView.setText(current.getTodo());
             holder.textViewDetail.setText(current.getTodoDetail());
@@ -44,35 +52,27 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoVi
             holder.image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    Toast.makeText(v.getContext(), current.getTodoID(), Toast.LENGTH_LONG).show();
+                    mToDoViewModel.deleteTaskById(current);
                 }
             });
             //populate checkboxes
-            if(current.getDoneStatus()==true){
-                holder.checkCompleted.setChecked(true);
-            }else if(current.getDoneStatus()==false){
-                holder.checkCompleted.setChecked(false);
-            }
+
+            holder.checkCompleted.setChecked(current.getDoneStatus());
             //toggle between between done and not done
             holder.checkCompleted.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if(holder.checkCompleted.isChecked()==true){
-                        current.setDoneStatus(true);
-                    }else if(holder.checkCompleted.isChecked()==false){
-                        current.setDoneStatus(false);
-                    }
+                    current.setDoneStatus(isChecked);
+                    mToDoViewModel.updateStatus(current);
                 }
             });
 
-
-        }else{
+        } else {
             holder.toDoItemView.setText("No ToDo");
         }
     }
 
-    void setToDos(List<ToDo> toDos){
+    void setToDos(List<ToDo> toDos) {
         mToDos = toDos;
         notifyDataSetChanged();
     }
@@ -83,22 +83,27 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoVi
 
     @Override
     public int getItemCount() {
-        if(mToDos!=null){
+        if (mToDos != null) {
             return mToDos.size();
-        }else {
+        } else {
             return 0;
         }
     }
 
-    class ToDoViewHolder extends RecyclerView.ViewHolder{
+    class ToDoViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView (R.id.textView) TextView toDoItemView;
-        @BindView(R.id.textViewDetail) TextView textViewDetail;
-        @BindView(R.id.textViewDate) TextView textViewDate;
-        @BindView(R.id.image) ImageView image;
-        @BindView(R.id.completed) CheckBox checkCompleted;
+        @BindView(R.id.textView)
+        TextView toDoItemView;
+        @BindView(R.id.textViewDetail)
+        TextView textViewDetail;
+        @BindView(R.id.textViewDate)
+        TextView textViewDate;
+        @BindView(R.id.image)
+        ImageView image;
+        @BindView(R.id.completed)
+        CheckBox checkCompleted;
 
-        private ToDoViewHolder(View itemView){
+        private ToDoViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

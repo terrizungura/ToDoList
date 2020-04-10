@@ -25,4 +25,12 @@ public class ToDoViewModel extends AndroidViewModel {
     public void insert(ToDo toDo){
         mToDoRepository.insert(toDo);
     }
+
+    public void deleteTaskById(ToDo toDo){
+        mToDoRepository.deleteTaskById(toDo);
+    }
+
+    public void updateStatus(ToDo toDo){
+        mToDoRepository.updateStatus(toDo);
+    }
 }
