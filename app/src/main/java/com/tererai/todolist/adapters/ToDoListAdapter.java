@@ -1,6 +1,5 @@
-package com.tererai.todolist;
+package com.tererai.todolist.adapters;
 
-import android.app.Application;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +8,12 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.tererai.todolist.R;
+import com.tererai.todolist.data.model.ToDo;
+import com.tererai.todolist.data.viewmodel.ToDoViewModel;
 
 import java.util.List;
 
@@ -27,8 +27,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoVi
     private Context mContext;
     private ToDoViewModel mToDoViewModel;
 
-
-    ToDoListAdapter(Context context, ToDoViewModel toDoViewModel) {
+    public ToDoListAdapter(Context context, ToDoViewModel toDoViewModel) {
         mInflator = LayoutInflater.from(context);
         this.mContext = context;
         this.mToDoViewModel = toDoViewModel;
@@ -72,14 +71,10 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoVi
         }
     }
 
-    void setToDos(List<ToDo> toDos) {
+    public void setToDos(List<ToDo> toDos) {
         mToDos = toDos;
         notifyDataSetChanged();
     }
-
-    // getItemCount() is called many times, and when it is first called,
-    // mWords has not been updated (means initially, it's null, and we can't return null).
-
 
     @Override
     public int getItemCount() {

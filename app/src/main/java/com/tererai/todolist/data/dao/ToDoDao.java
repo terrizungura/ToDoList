@@ -1,4 +1,4 @@
-package com.tererai.todolist;
+package com.tererai.todolist.data.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -7,6 +7,8 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
+
+import com.tererai.todolist.data.model.ToDo;
 
 import java.util.List;
 

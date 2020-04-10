@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorScreenBackground"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="24dp">
 
@@ -18,10 +18,29 @@
         android:hint="@string/hint_detail"
         android:inputType="textAutoComplete" />
 
-    <EditText
-        android:id="@+id/edit_todo_date"
-        style="@style/text_view_style"
-        android:hint="@string/date" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edit_todo_date"
+            style="@style/text_view_style"
+            android:layout_width="0dp"
+            android:layout_weight="0.9"
+            android:focusable="false"
+            android:hint="@string/date" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/calendarPicker"
+            android:layout_width="0dp"
+            android:layout_weight="0.1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:tint="@color/colorPrimary"
+            app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/button_save"
