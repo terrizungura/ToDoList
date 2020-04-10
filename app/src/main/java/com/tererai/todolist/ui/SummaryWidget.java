@@ -1,4 +1,4 @@
-package com.tererai.todolist;
+package com.tererai.todolist.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -8,6 +8,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+
+import com.tererai.todolist.R;
+import com.tererai.todolist.data.model.ToDo;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

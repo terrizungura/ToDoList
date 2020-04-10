@@ -4,6 +4,9 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.room.Room;
 import androidx.test.InstrumentationRegistry;
 
+import com.tererai.todolist.data.dataBase.ToDoRoomDatabase;
+import com.tererai.todolist.data.model.ToDo;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;

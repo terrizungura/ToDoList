@@ -15,15 +15,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:cardBackgroundColor="#EEE6E6"
-        android:elevation="8dp">
+        app:cardBackgroundColor="@color/card_bg_color"
+        android:elevation="@dimen/normal_margin">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingBottom="4dp">
 
-            <com.tererai.todolist.SummaryWidget
+            <com.tererai.todolist.ui.SummaryWidget
                 android:id="@+id/summary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -32,9 +32,9 @@
                 android:id="@+id/header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:text="TO DO"
+                android:layout_marginStart="@dimen/double_margin"
+                android:layout_marginLeft="@dimen/double_margin"
+                android:text="@string/to_do"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
         </LinearLayout>
@@ -49,7 +49,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/summaryCard"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="@dimen/normal_margin"
         tools:itemCount="3"
         android:clipToPadding="false"
         tools:listitem="@layout/recyclerview_item" />

@@ -1,11 +1,9 @@
-package com.tererai.todolist;
+package com.tererai.todolist.data.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-import java.util.Date;
 
 @Entity(tableName = "todo_table")
 public class ToDo {
@@ -24,16 +22,16 @@ public class ToDo {
     private String mTodoDetail;
 
     @NonNull
-    @ColumnInfo(name="date")
+    @ColumnInfo(name = "date")
     private String mDate;
 
     @NonNull
     @ColumnInfo(name = "done_status")
     private boolean mDoneStatus;
 
-    public ToDo(@NonNull String todoID, @NonNull String todo, @NonNull String todoDetail, @NonNull String date, @NonNull boolean doneStatus){
-        this.mTodoID=todoID;
-        this.mTodo=todo;
+    public ToDo(@NonNull String todoID, @NonNull String todo, @NonNull String todoDetail, @NonNull String date, @NonNull boolean doneStatus) {
+        this.mTodoID = todoID;
+        this.mTodo = todo;
         this.mTodoDetail = todoDetail;
         this.mDate = date;
         this.mDoneStatus = doneStatus;
@@ -63,7 +61,7 @@ public class ToDo {
         return this.mTodoID;
     }
 
-    public String getTodo(){
+    public String getTodo() {
         return this.mTodo;
     }
 
@@ -75,7 +73,7 @@ public class ToDo {
         return mDate;
     }
 
-    public boolean getDoneStatus(){
+    public boolean getDoneStatus() {
         return this.mDoneStatus;
     }
 }

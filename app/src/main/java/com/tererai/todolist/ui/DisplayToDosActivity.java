@@ -1,4 +1,4 @@
-package com.tererai.todolist;
+package com.tererai.todolist.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,10 +12,16 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.tererai.todolist.R;
+import com.tererai.todolist.data.model.ToDo;
+import com.tererai.todolist.data.viewmodel.ToDoViewModel;
+import com.tererai.todolist.adapters.ToDoListAdapter;
 
 import java.util.List;
 
@@ -25,8 +31,10 @@ public class DisplayToDosActivity extends AppCompatActivity {
 
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
 
-    @BindView(R.id.fab) FloatingActionButton fab;
-    @BindView(R.id.summary) SummaryWidget summaryWidget;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+    @BindView(R.id.summary)
+    SummaryWidget summaryWidget;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +79,6 @@ public class DisplayToDosActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }

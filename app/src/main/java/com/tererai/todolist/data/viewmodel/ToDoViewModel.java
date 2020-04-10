@@ -1,9 +1,12 @@
-package com.tererai.todolist;
+package com.tererai.todolist.data.viewmodel;
 
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+
+import com.tererai.todolist.data.model.ToDo;
+import com.tererai.todolist.data.repository.ToDoRepository;
 
 import java.util.List;
 
