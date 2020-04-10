@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="8dp">
+    android:padding="@dimen/normal_margin">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -18,10 +18,10 @@
             android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:text="Work things to complete"
+            android:layout_marginStart="@dimen/normal_margin"
+            android:layout_marginLeft="@dimen/double_margin"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:text="@string/work_things_to_complete"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -29,9 +29,9 @@
             android:id="@+id/progress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="@dimen/normal_margin"
+            android:layout_marginLeft="@dimen/double_margin"
+            android:layout_marginTop="@dimen/normal_margin"
             android:text="Progress" />
 
         <ProgressBar
@@ -39,13 +39,13 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginStart="@dimen/normal_margin"
+            android:layout_marginLeft="@dimen/normal_margin"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:layout_marginEnd="@dimen/normal_margin"
+            android:layout_marginRight="@dimen/normal_margin"
             android:max="100"
-            android:progress="25" />
+            android:progress="1" />
     </LinearLayout>
 
     <LinearLayout
@@ -65,6 +65,6 @@
             android:id="@+id/txtDone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Done" />
+            android:text="@string/done" />
     </LinearLayout>
 </LinearLayout>

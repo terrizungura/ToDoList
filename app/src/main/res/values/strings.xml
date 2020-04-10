@@ -14,4 +14,10 @@
     <string name="button_save">Save</string>
     <string name="empty_not_saved">No ToDO added</string>
     <string name="hint_detail">Details</string>
+    <string name="concat_percentage">%d%%</string>
+    <string name="date">DD/MM/YYYY</string>
+    <string name="work_things_to_complete">Work things to complete</string>
+    <string name="done">Done</string>
+    <string name="to_do">TO DO</string>
+    <string name="dummy_progress">0% tasks done</string>
 </resources>

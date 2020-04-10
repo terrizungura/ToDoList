@@ -1,30 +1,29 @@
-package com.tererai.todolist;
+package com.tererai.todolist.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.Toast;
-
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.tererai.todolist.R;
+import com.tererai.todolist.data.model.ToDo;
+import com.tererai.todolist.data.viewmodel.ToDoViewModel;
+import com.tererai.todolist.adapters.ToDoListAdapter;
+
+import java.util.List;
 
 public class DisplayToDosActivity extends AppCompatActivity {
 
@@ -32,7 +31,10 @@ public class DisplayToDosActivity extends AppCompatActivity {
 
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
 
-    @BindView(R.id.fab) FloatingActionButton fab;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+    @BindView(R.id.summary)
+    SummaryWidget summaryWidget;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,7 @@ public class DisplayToDosActivity extends AppCompatActivity {
         mToDoViewModel = ViewModelProviders.of(this).get(ToDoViewModel.class);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        final ToDoListAdapter adapter = new ToDoListAdapter(this);
+        final ToDoListAdapter adapter = new ToDoListAdapter(this, mToDoViewModel);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -55,16 +57,16 @@ public class DisplayToDosActivity extends AppCompatActivity {
             public void onChanged(List<ToDo> toDos) {
                 // Update the cached copy of the ToDos in the adapter.
                 adapter.setToDos(toDos);
+                setProgress(toDos);
             }
         });
     }
 
     @OnClick(R.id.fab)
-        public void addNewToDo() {
-            Intent intent = new Intent(DisplayToDosActivity.this, NewToDoActivity.class);
-            startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
-
-        }
+    public void addNewToDo() {
+        Intent intent = new Intent(DisplayToDosActivity.this, NewToDoActivity.class);
+        startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -77,7 +79,6 @@ public class DisplayToDosActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -90,8 +91,7 @@ public class DisplayToDosActivity extends AppCompatActivity {
 
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             ToDo toDo = new ToDo(data.getStringExtra(NewToDoActivity.EXTRA_ID),
-                    data.getStringExtra(NewToDoActivity.EXTRA_REPLY),
-                    data.getStringExtra(NewToDoActivity.EXTRA_DETAIL),
+                    data.getStringExtra(NewToDoActivity.EXTRA_REPLY), data.getStringExtra(NewToDoActivity.EXTRA_DETAIL),
                     data.getStringExtra(NewToDoActivity.EXTRA_DATE),
                     data.getExtras().getBoolean(NewToDoActivity.EXTRA_STATUS));
             mToDoViewModel.insert(toDo);
@@ -100,5 +100,7 @@ public class DisplayToDosActivity extends AppCompatActivity {
         }
     }
 
-
+    public void setProgress(List<ToDo> toDos) {
+        summaryWidget.display(this, toDos);
+    }
 }

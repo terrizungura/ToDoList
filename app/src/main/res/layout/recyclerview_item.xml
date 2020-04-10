@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                tools:text="Tetralycyl" />
+                tools:text="Task" />
 
             <TextView
                 android:id="@+id/textViewDetail"
@@ -39,7 +39,7 @@
                 android:id="@+id/textViewDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="0% of the medicine taken" />
+                tools:text="@string/dummy_progress" />
         </LinearLayout>
 
         <LinearLayout
