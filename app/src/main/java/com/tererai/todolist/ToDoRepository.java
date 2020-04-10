@@ -71,8 +71,7 @@ public class ToDoRepository {
 
         @Override
         protected Void doInBackground(ToDo... toDos) {
-            ToDo toDo = toDos[0];
-            mAsyncTaskDao.updateStatus(toDo.getDoneStatus(), toDo.getTodoID());
+            mAsyncTaskDao.updateStatus(toDos[0]);
             return null;
         }
     }

@@ -21,7 +21,7 @@
     <EditText
         android:id="@+id/edit_todo_date"
         style="@style/text_view_style"
-        android:inputType="datetime" />
+        android:hint="@string/date" />
 
     <Button
         android:id="@+id/button_save"

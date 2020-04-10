@@ -25,9 +25,8 @@ public interface ToDoDao {
     @Delete
     void deleteTaskById(ToDo toDo);
 
-    @Query("UPDATE todo_table SET done_status = :done_status WHERE todoID = :todoID")
-    void updateStatus(boolean done_status, String todoID);
-   /* @Update
-    void update(ToDo... todo);*/
+    @Update
+    void updateStatus(ToDo toDo);
+
 
 }
