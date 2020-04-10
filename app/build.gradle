@@ -52,4 +52,8 @@ dependencies {
     //Butter knife
     implementation 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+
+    // Unit testing dependencies
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'android.arch.core:core-testing:1.1.0'
 }
